@@ -20,7 +20,7 @@ public:
             mp[s[l]-'a']++;
             l++;
             if(l>=p.length()) {
-                if(check(mp,pMap)){
+                if(mp == pMap){
                     ans.push_back(st);
                 }
                 mp[s[st]-'a']--;
