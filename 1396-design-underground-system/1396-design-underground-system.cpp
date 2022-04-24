@@ -1,7 +1,7 @@
 class UndergroundSystem {
 public:
-    map<int,pair<string,int>>checkin;
-    map<string,map<string,pair<double,int> > >mp;
+    unordered_map<int,pair<string,int>>checkin;
+    unordered_map<string,map<string,pair<double,int> > >mp;
     UndergroundSystem() {
         checkin.clear();
         mp.clear();
