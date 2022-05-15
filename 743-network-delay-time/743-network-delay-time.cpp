@@ -6,14 +6,14 @@ public:
         for(int i=0;i<times.size();i++) {
             adj[times[i][0]].push_back(make_pair(times[i][1], times[i][2]));
         }
-        queue<pair<int,int>>q;
-        q.push(make_pair(k,0));
+        priority_queue<pair<int,int>,vector<pair<int,int> >, greater<pair<int,int> > >q;
+        q.push(make_pair(0,k));
         int ans = 0;
         vector<int>visited(n+1,INT_MAX);
         visited[k] = 0;
         while(!q.empty()) {
-            int node = q.front().first;
-            int d = q.front().second;
+            int node = q.top().second;
+            int d = q.top().first;
             q.pop();
             for(int i=0;i<adj[node].size();i++) {
                 int nd = adj[node][i].first;
@@ -21,7 +21,7 @@ public:
                 // cout<<node<<" "<<nd<<" "<<dist<<endl;
                 if(visited[nd] > dist) {
                     visited[nd] = dist;
-                    q.push(make_pair(nd,dist));
+                    q.push(make_pair(dist,nd));
                 }
             }
         }
