@@ -13,7 +13,7 @@ public:
                 mx = max(mx,len);
                 while(mp[s[r]]==true)
                 {
-                    mp[s[l]] = 0;
+                    mp[s[l]] = false;
                     l++;
                 }
                 mp[s[r]] = true;
