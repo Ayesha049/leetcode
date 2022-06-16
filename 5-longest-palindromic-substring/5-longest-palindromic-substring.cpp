@@ -1,54 +1,27 @@
 class Solution {
 public:
     string longestPalindrome(string s) {
-        if(s.length()<=1) return s;
-        string ans = "";
-        int st=0,en=0;
-        int len = 1;
-        for(int i=0;i<s.length();i++)
-        {
-            //odd
-            int stt = i-1;
-            int enn = i+1;
-            while(stt>=0 && enn<s.length())
-            {
-                if(s[stt]==s[enn])
-                {
-                    int now = enn - stt +1;
-                    if(now>len)
-                    {
-                        len = now;
-                        st = stt;
-                        en = enn;
-                    }
-                    stt--;
-                    enn++;
+        if(s.length() == 0) return s;
+        int mxlen = 1;
+        int st = 0;
+        int en = 0;
+        int n = s.length();
+        vector<bool>temp(n,false);
+        vector<vector<bool> >dp(n,temp);
+        for(int len=2;len<=n;len++) {
+            for(int i=0; i+len-1<n; i++) {
+                dp[i][i+len-1] = (s[i] == s[i+len-1] && (len<=3 || dp[i+1][i+len-2]));
+                if(dp[i][i+len-1] && len>mxlen) {
+                    mxlen = len;
+                    st = i;
+                    en = i+len-1; 
                 }
-                else break;
-            }
-            
-            //even
-            stt = i;
-            enn = i+1;
-            while(stt>=0 && enn<s.length())
-            {
-                if(s[stt]==s[enn])
-                {
-                    int now = enn - stt +1;
-                    if(now>len)
-                    {
-                        len = now;
-                        st = stt;
-                        en = enn;
-                    }
-                    stt--;
-                    enn++;
-                }
-                else break;
             }
         }
-        for(int i=st;i<=en;i++) ans+=s[i];
+        string ans = "";
+        for(int i=st;i<=en;i++) {
+            ans+=s[i];
+        }
         return ans;
-        
     }
 };
