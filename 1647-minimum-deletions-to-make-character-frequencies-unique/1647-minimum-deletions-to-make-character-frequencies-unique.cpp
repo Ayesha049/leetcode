@@ -12,20 +12,17 @@ public:
         }
         sort(v.begin(),v.end());
         int mx = v.back();
-        stack<int>st;
-        for(int i=0;i<=mx;i++) {
-            st.push(i);
-        }
+        int mxFeqAllowed = mx;
         int cnt = 0;
         for(int i=v.size()-1;i>=0;i--) {
-            while(!st.empty() && st.top() > v[i]) {
-                st.pop();
+            while(mxFeqAllowed != 0 && mxFeqAllowed > v[i]) {
+                mxFeqAllowed--;
             }
-            if(st.empty()) {
+            if(mxFeqAllowed == 0) {
                 cnt+=v[i];
             } else {
-                cnt+= v[i] - st.top();
-                st.pop();
+                cnt+= v[i] - mxFeqAllowed;
+                mxFeqAllowed--;
             }
         }
         return cnt;
