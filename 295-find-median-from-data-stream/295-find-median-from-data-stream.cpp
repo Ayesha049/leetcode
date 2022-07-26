@@ -1,14 +1,14 @@
 class MedianFinder {
 public:
-    priority_queue<int>firstHalf;
-    priority_queue<int,vector<int>,greater<int> >secondHalf;
+    priority_queue<int>secondHalf;
+    priority_queue<int,vector<int>,greater<int> >firstHalf;
     
     MedianFinder() {
         
     }
     
     void addNum(int num) {
-        if(firstHalf.size() == 0 || firstHalf.top() > num) {
+        if(firstHalf.size() == 0 || firstHalf.top() < num) {
             firstHalf.push(num);
         } else {
             secondHalf.push(num);
