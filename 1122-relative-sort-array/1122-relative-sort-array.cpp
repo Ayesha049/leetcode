@@ -1,5 +1,10 @@
 class Solution {
 public:
+    static bool comp(pair<int,int> &a, pair<int,int> &b) {
+        if(a.first == b.first) return a.second < b.second;
+        return a.first < b.first;
+        
+    }
     vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2) {
         unordered_map<int,int>mp;
         for(int i=0;i<arr2.size();i++) {
