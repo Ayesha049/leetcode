@@ -1,31 +1,17 @@
 class Solution {
 public:
-    static bool comp(pair<int,int> &a, pair<int,int> &b) {
-        if(a.first == b.first) return a.second < b.second;
-        return a.first < b.first;
-        
-    }
     vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2) {
         unordered_map<int,int>mp;
         for(int i=0;i<arr2.size();i++) {
-            mp[arr2[i]] = i;
+            mp[arr2[i]] = i+1;
         }
-        vector<pair<int,int> >v;
-        int mxCount = arr2.size();
-        for(int i=0;i<arr1.size();i++) {
-            int pos;
-            if(mp.find(arr1[i]) != mp.end()) {
-                pos = mp[arr1[i]];
-            } else {
-                pos = mxCount;
-            }
-            v.push_back(make_pair(pos,arr1[i]));
-        }
-        sort(v.begin(),v.end(), comp);
-        vector<int>ans;
-        for(int i=0;i<v.size();i++) {
-            ans.push_back(v[i].second);
-        }
-        return ans;
+        auto comp = [&](int a , int b) {
+            if(mp[a] == 0  && mp[b]==0) return a<b;
+            if(mp[a] == 0)  return false;
+            if(mp[b] == 0)   return true;
+            return mp[a] < mp[b];
+        };
+        sort(arr1.begin(),arr1.end(),comp);
+        return arr1;
     }
 };
